@@ -21,22 +21,13 @@ namespace EML_viewer
     /// </summary>
     public partial class MainWindow : Window
     {
+        MsgReader.Mime.Message eml;
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void click_filepicker(object sender, RoutedEventArgs e)
-        {
 
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "EML files (*.eml)|*.eml";
-            openFileDialog.InitialDirectory = @"C:\";
-            if (openFileDialog.ShowDialog() == true) {
-                
-
-            }
-        }
 
         private void source_Loaded(object sender, RoutedEventArgs e)
         {
@@ -56,7 +47,7 @@ namespace EML_viewer
         private void source_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FileInfo fileInfo = new FileInfo((source.SelectedItem).ToString());
-            MsgReader.Mime.Message eml = MsgReader.Mime.Message.Load(fileInfo);
+            eml = MsgReader.Mime.Message.Load(fileInfo);
             from.Text = eml.Headers.From.ToString();
             if (eml.Headers != null)
             {
@@ -77,12 +68,31 @@ namespace EML_viewer
                 textBody.Visibility = Visibility.Visible;
                 textBody.Text = System.Text.Encoding.UTF8.GetString(eml.TextBody.Body);
             }
+            attachment.Text = string.Join(", ", eml.Attachments.Select(x => x.FileName).ToArray());
+            if (attachment.Text == "")
+            {
+                attachment.Text = "Aucun";
+                extract_attachment.Visibility = Visibility.Hidden;
+            } else
+            {
+                extract_attachment.Visibility = Visibility.Visible;
+            }
+
 
             if (eml.HtmlBody != null)
             {
                 htmlBody.Visibility = Visibility.Visible;
                 textBody.Visibility = Visibility.Hidden;
                 htmlBody.NavigateToString(System.Text.Encoding.UTF8.GetString(eml.HtmlBody.Body));
+            }
+        }
+
+        private void extract_attachment_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (MsgReader.Mime.MessagePart file in eml.Attachments)
+            {
+                FileInfo newfile = new FileInfo("c:\\source\\" + file.FileName);
+                file.Save(newfile);
             }
         }
     }

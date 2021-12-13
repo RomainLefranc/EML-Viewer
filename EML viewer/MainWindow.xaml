@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EML_viewer"
         mc:Ignorable="d"
-        Title="MainWindow" Width="800">
+        Title="EML Viewer"  Width="800">
     <Grid>
         <TextBox x:Name="from" TextWrapping="Wrap" Width="380" Margin="10,97,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
         <Label Content="De :" Margin="10,71,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
@@ -14,9 +14,9 @@
         <TextBox x:Name="date" TextWrapping="Wrap" Width="379" Margin="11,141,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
         <Label Content="Sujet :" Margin="400,159,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <TextBox x:Name="subject" TextWrapping="Wrap" Width="371" Margin="400,185,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
-        <Label Content="Corp :" Margin="12,203,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="textBody" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Width="780" Margin="0,229,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="186" Visibility="Hidden" />
-        <WebBrowser x:Name="htmlBody" Margin="10,229,10,10" Visibility="Hidden"/>
+        <Label Content="Message :" Margin="13,274,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="textBody" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Width="780" Margin="0,300,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="336" Visibility="Hidden" />
+        <WebBrowser x:Name="htmlBody" Margin="10,300,10,10" Visibility="Hidden"/>
         <ComboBox x:Name="source" Width="761" Margin="10,44,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="source_Loaded" SelectionChanged="source_SelectionChanged"/>
         <Label Content="Source" Margin="10,19,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <Label Content="A :" Margin="400,71,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
@@ -24,6 +24,9 @@
         <TextBox x:Name="cc" TextWrapping="Wrap" Width="371" Margin="400,141,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
         <Label Content="Cci :" Margin="11,159,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <TextBox x:Name="cci" TextWrapping="Wrap" Width="379" Margin="11,185,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <Button x:Name="extract_attachment" Content="Extraire piece jointe" Margin="10,252,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="181" Height="22" Click="extract_attachment_Click" Visibility="Hidden"/>
+        <Label Content="Piece(s) jointes :" Margin="13,203,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="attachment" TextWrapping="Wrap" Width="759" Margin="12,229,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
 
     </Grid>
 </Window>
