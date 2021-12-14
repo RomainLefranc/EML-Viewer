@@ -5,28 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EML_viewer"
         mc:Ignorable="d"
-        Title="EML Viewer"  Width="800">
-    <Grid>
-        <TextBox x:Name="from" TextWrapping="Wrap" Width="380" Margin="10,97,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
-        <Label Content="De :" Margin="10,71,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="to" TextWrapping="Wrap" Width="371" Margin="400,97,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
-        <Label Content="Date :" Margin="11,115,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="date" TextWrapping="Wrap" Width="379" Margin="11,141,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
-        <Label Content="Sujet :" Margin="400,159,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="subject" TextWrapping="Wrap" Width="371" Margin="400,185,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
-        <Label Content="Message :" Margin="13,274,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="textBody" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Width="780" Margin="0,300,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="336" Visibility="Hidden" />
-        <WebBrowser x:Name="htmlBody" Margin="10,300,10,10" Visibility="Hidden"/>
-        <ComboBox x:Name="source" Width="761" Margin="10,44,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="source_Loaded" SelectionChanged="source_SelectionChanged"/>
-        <Label Content="Source" Margin="10,19,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <Label Content="A :" Margin="400,71,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <Label Content="Cc :" Margin="400,115,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="cc" TextWrapping="Wrap" Width="371" Margin="400,141,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
-        <Label Content="Cci :" Margin="11,159,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="cci" TextWrapping="Wrap" Width="379" Margin="11,185,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
-        <Button x:Name="extract_attachment" Content="Extraire piece jointe" Margin="10,252,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="181" Height="22" Click="extract_attachment_Click" Visibility="Hidden"/>
-        <Label Content="Piece(s) jointes :" Margin="13,203,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="attachment" TextWrapping="Wrap" Width="759" Margin="12,229,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
-
+        Title="EML Viewer" SizeToContent="Width">
+    <Grid Width="800" >
+        <TextBox x:Name="from" TextWrapping="Wrap" Width="380" Margin="10,85,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <Label Content="De :" Margin="10,59,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="to" TextWrapping="Wrap" Width="390" Margin="400,85,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <Label Content="Date :" Margin="10,103,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="date" TextWrapping="Wrap" Width="379" Margin="10,129,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <Label Content="Sujet :" Margin="400,147,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="subject" TextWrapping="Wrap" Width="390" Margin="400,173,0,0" VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Left"/>
+        <Label Content="Message :" Margin="10,314,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="textBody" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Margin="0,340,0,0" HorizontalAlignment="Center" Visibility="Visible" VerticalAlignment="Top" Width="780" />
+        <ComboBox x:Name="source" Width="780" Margin="0,32,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Loaded="Source_Loaded" SelectionChanged="Source_SelectionChanged"/>
+        <Label Content="Source" Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <Label Content="A :" Margin="400,59,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <Label Content="Cc :" Margin="400,103,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="cc" TextWrapping="Wrap" Width="390" Margin="400,129,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <Label Content="Cci :" Margin="10,147,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="cci" TextWrapping="Wrap" Width="379" Margin="10,173,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <Label Content="Piece(s) jointes :" Margin="10,191,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <ListBox x:Name="attachment" Margin="0,217,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="780" Height="97"/>
     </Grid>
 </Window>

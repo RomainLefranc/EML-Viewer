@@ -27,26 +27,24 @@ namespace EML_viewer
             InitializeComponent();
         }
 
-
-
-        private void source_Loaded(object sender, RoutedEventArgs e)
+        private void Source_Loaded(object sender, RoutedEventArgs e)
         {
             if (!Directory.Exists(@"c:\source\"))
             {
-                Directory.CreateDirectory(@"c:\source\");
+                _ = Directory.CreateDirectory(@"c:\source\");
             }
 
             string[] filePaths = Directory.GetFiles(@"c:\source\", "*.eml");
 
             foreach (string file in filePaths)
             {
-                source.Items.Add(file);
+                _ = source.Items.Add(file);
             }
         }
 
-        private void source_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Source_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            FileInfo fileInfo = new FileInfo((source.SelectedItem).ToString());
+            FileInfo fileInfo = new FileInfo(source.SelectedItem.ToString());
             eml = MsgReader.Mime.Message.Load(fileInfo);
             from.Text = eml.Headers.From.ToString();
             if (eml.Headers != null)
@@ -62,38 +60,30 @@ namespace EML_viewer
             cc.Text = string.Join(", ", eml.Headers.Cc.Select(x => x.Address).ToArray());
             cci.Text = string.Join(", ", eml.Headers.Bcc.Select(x => x.Address).ToArray());
             date.Text = eml.Headers.Date;
-            if (eml.TextBody != null)
+
+            attachment.Items.Clear();
+            foreach (MsgReader.Mime.MessagePart piece in eml.Attachments)
             {
-                htmlBody.Visibility = Visibility.Hidden;
-                textBody.Visibility = Visibility.Visible;
-                textBody.Text = System.Text.Encoding.UTF8.GetString(eml.TextBody.Body);
+                _ = attachment.Items.Add(piece.ContentType + " - " + piece.BodyEncoding.GetByteCount(piece.GetBodyAsText()) + " octets");
             }
-            attachment.Text = string.Join(", ", eml.Attachments.Select(x => x.FileName).ToArray());
-            if (attachment.Text == "")
+
+            if (attachment.Items.Count == 0)
             {
-                attachment.Text = "Aucun";
-                extract_attachment.Visibility = Visibility.Hidden;
+                attachment.IsEnabled = false;
             } else
             {
-                extract_attachment.Visibility = Visibility.Visible;
+                attachment.IsEnabled = true;
             }
 
-
+            if (eml.TextBody != null)
+            {
+                textBody.Text = Encoding.UTF8.GetString(eml.TextBody.Body);
+            }
             if (eml.HtmlBody != null)
             {
-                htmlBody.Visibility = Visibility.Visible;
-                textBody.Visibility = Visibility.Hidden;
-                htmlBody.NavigateToString(System.Text.Encoding.UTF8.GetString(eml.HtmlBody.Body));
+                textBody.Text = Encoding.UTF8.GetString(eml.HtmlBody.Body);
             }
         }
 
-        private void extract_attachment_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (MsgReader.Mime.MessagePart file in eml.Attachments)
-            {
-                FileInfo newfile = new FileInfo("c:\\source\\" + file.FileName);
-                file.Save(newfile);
-            }
-        }
     }
 }

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Karmine_Corp_logo.svg.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MSGReader" Version="4.2.3" />
   </ItemGroup>
 
