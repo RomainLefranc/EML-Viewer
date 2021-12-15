@@ -5,25 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EML_viewer"
         mc:Ignorable="d"
-        Title="EML Viewer" SizeToContent="Width">
+        Title="EML Viewer" SizeToContent="WidthAndHeight">
     <Grid Width="800" >
-        <TextBox x:Name="from" TextWrapping="Wrap" Width="380" Margin="10,85,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="from" TextWrapping="Wrap" Width="380" Margin="10,85,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True"/>
         <Label Content="De :" Margin="10,59,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="to" TextWrapping="Wrap" Width="390" Margin="400,85,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="to" TextWrapping="Wrap" Width="390" Margin="400,85,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True"/>
         <Label Content="Date :" Margin="10,103,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="date" TextWrapping="Wrap" Width="379" Margin="10,129,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="date" TextWrapping="Wrap" Width="379" Margin="10,129,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True"/>
         <Label Content="Sujet :" Margin="400,147,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="subject" TextWrapping="Wrap" Width="390" Margin="400,173,0,0" VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Left"/>
+        <TextBox x:Name="subject" TextWrapping="Wrap" Width="390" Margin="400,173,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsReadOnly="True"/>
         <Label Content="Message :" Margin="10,314,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="textBody" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Margin="0,340,0,0" HorizontalAlignment="Center" Visibility="Visible" VerticalAlignment="Top" Width="780" />
+        <TextBox x:Name="textBody" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Margin="0,340,0,10" HorizontalAlignment="Center" Visibility="Visible" VerticalAlignment="Top" Width="780" IsReadOnly="True" />
         <ComboBox x:Name="source" Width="780" Margin="0,32,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Loaded="Source_Loaded" SelectionChanged="Source_SelectionChanged"/>
         <Label Content="Source" Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <Label Content="A :" Margin="400,59,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <Label Content="Cc :" Margin="400,103,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="cc" TextWrapping="Wrap" Width="390" Margin="400,129,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="cc" TextWrapping="Wrap" Width="390" Margin="400,129,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True"/>
         <Label Content="Cci :" Margin="10,147,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="cci" TextWrapping="Wrap" Width="379" Margin="10,173,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="cci" TextWrapping="Wrap" Width="379" Margin="10,173,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True"/>
         <Label Content="Piece(s) jointes :" Margin="10,191,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <ListBox x:Name="attachment" Margin="0,217,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="780" Height="97"/>
+        <ListBox x:Name="attachment" Margin="0,217,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="780" Height="97" ScrollViewer.VerticalScrollBarVisibility="Auto" UseLayoutRounding="False">
+        </ListBox>
+
     </Grid>
 </Window>
