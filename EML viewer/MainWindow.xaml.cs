@@ -10,34 +10,34 @@ namespace EML_viewer
     /// </summary>
     public partial class MainWindow : Window
     {
-        MsgReader.Mime.Message eml;
+        private MsgReader.Mime.Message eml;
         public MainWindow()
         {
             InitializeComponent();
+            // verification que le dossier source existe et creation du dossier si il n'existe pas
+            if (!Directory.Exists(@"source\"))
+            {
+                _ = Directory.CreateDirectory(@"source\");
+            }
         }
 
         private void Source_Loaded(object sender, RoutedEventArgs e)
         {
-            // verification que le dossier source existe et creation du dossier si il n'existe pas
-            if (!Directory.Exists(@"c:\source\"))
-            {
-                _ = Directory.CreateDirectory(@"c:\source\");
-            }
 
             // récupération d'une tableau contenant tout les fichiers du dossier source
-            string[] filePaths = Directory.GetFiles(@"c:\source\", "*.eml");
+            string[] filePaths = Directory.GetFiles(@"source\", "*.eml");
 
             // ajout des fichiers dans un combobox
             foreach (string file in filePaths)
             {
-                _ = source.Items.Add(file);
+                _ = source.Items.Add(file.Split(@"\")[1]);
             }
         }
 
         private void Source_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // récuperation du fichier a analyser
-            FileInfo fileInfo = new FileInfo(source.SelectedItem.ToString());
+            FileInfo fileInfo = new FileInfo(@"source\" + source.SelectedItem.ToString());
 
             // analyse du fichier
             eml = MsgReader.Mime.Message.Load(fileInfo);
@@ -66,10 +66,10 @@ namespace EML_viewer
 
             foreach (MsgReader.Mime.MessagePart piece in eml.Attachments)
             {
-                _ = attachment.Items.Add(piece.ContentType + " - " + piece.BodyEncoding.GetByteCount(piece.GetBodyAsText()) + " octets");
+                _ = attachment.Items.Add(piece.FileName + " - " + piece.BodyEncoding.GetByteCount(piece.GetBodyAsText()) + " octets");
             }
-
             attachment.IsEnabled = attachment.Items.Count != 0;
+            extract_attachment.IsEnabled = attachment.Items.Count != 0;
 
             if (eml.TextBody != null)
             {
@@ -81,5 +81,36 @@ namespace EML_viewer
             }
         }
 
+        private void Extract_attachment_Click(object sender, RoutedEventArgs e)
+        {
+            if (attachment.SelectedIndex >= 0)
+            {
+                string filename = attachment.SelectedItem.ToString().Split(" - ")[0];
+                if (!File.Exists(@"source\" + filename))
+                {
+                    MsgReader.Mime.MessagePart file = eml.Attachments.FirstOrDefault(x => x.FileName == filename);
+                    FileInfo fileInfo = new FileInfo(@"source\" + filename);
+                    file.Save(fileInfo);
+                    _ = MessageBox.Show("Le fichier " + filename + " à été extrait");
+                } else
+                {
+                    _ = MessageBox.Show("Le fichier " + filename + " à déjà été extrait");
+                }
+
+            } else
+            {
+                _ = MessageBox.Show("Veuillez selectioner une piece jointe");
+            }
+        }
+
+        private void Openfolder_Click(object sender, RoutedEventArgs e)
+        {
+            _ = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+            {
+                FileName = @"source\",
+                UseShellExecute = true,
+                Verb = "open"
+            });
+        }
     }
 }

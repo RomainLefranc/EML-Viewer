@@ -7,13 +7,12 @@
         mc:Ignorable="d"
         Title="EML Viewer" Width="800" VerticalAlignment="Top" SizeToContent="Height">
     <Grid VerticalAlignment="Top" >
-        <Label Content="Message :" Margin="10,314,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <TextBox x:Name="textBody" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Margin="10,340,10,19" Visibility="Visible" VerticalAlignment="Top" IsReadOnly="True" />
-        <ComboBox x:Name="source" Margin="10,32,10,0" VerticalAlignment="Top" Loaded="Source_Loaded" SelectionChanged="Source_SelectionChanged"/>
-        <Label Content="Source" Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <Label Content="Piece(s) jointes :" Margin="10,191,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <ListBox x:Name="attachment" Margin="10,217,10,0" VerticalAlignment="Top" Height="97" ScrollViewer.VerticalScrollBarVisibility="Auto" UseLayoutRounding="False"/>
-        <Grid Margin="10,54,10,0"  VerticalAlignment="Top" Height="137">
+        <Label Content="Message :" Margin="10,335,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="textBody" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Margin="10,361,10,10" Visibility="Visible" VerticalAlignment="Top" IsReadOnly="True" />
+        <Label Content="Source" Margin="10,3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <Label Content="Piece(s) jointes :" Margin="10,187,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <ListBox x:Name="attachment" Margin="10,213,10,0" ScrollViewer.VerticalScrollBarVisibility="Auto" UseLayoutRounding="False" VerticalAlignment="Top" Height="97"/>
+        <Grid Margin="10,50,10,0"  VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -30,6 +29,15 @@
             <TextBox x:Name="cc" TextWrapping="Wrap" Margin="0,69,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" IsReadOnly="True" Grid.Column="1"/>
             <Label Content="Sujet :" Margin="0,87,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5" Grid.Column="1"/>
             <TextBox x:Name="subject" TextWrapping="Wrap" Margin="0,111,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" IsReadOnly="True" Grid.Column="1"/>
+        </Grid>
+        <Button x:Name="extract_attachment" Content="Extraire" Margin="10,315,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="164" IsEnabled="False" Click="Extract_attachment_Click"/>
+        <Grid Margin="10,29,10,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="83*"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox x:Name="source" Margin="0,-1,10,0" VerticalAlignment="Top" Loaded="Source_Loaded" SelectionChanged="Source_SelectionChanged"/>
+            <Button x:Name="openfolder" Content="Ouvrir dossier source" VerticalAlignment="Top" Height="22" Click="Openfolder_Click" Grid.Column="1" Margin="0,-1,0,0" HorizontalAlignment="Center" Width="200"/>
         </Grid>
 
     </Grid>
