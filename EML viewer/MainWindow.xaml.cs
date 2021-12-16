@@ -66,19 +66,12 @@ namespace EML_viewer
 
             foreach (MsgReader.Mime.MessagePart piece in eml.Attachments)
             {
-                _ = attachment.Items.Add(piece.FileName + " - " + piece.BodyEncoding.GetByteCount(piece.GetBodyAsText()) + " octets");
+                _ = attachment.Items.Add(piece.FileName + " - " + piece.ContentType.MediaType + " - " + piece.BodyEncoding.GetByteCount(piece.GetBodyAsText()) + " octets");
             }
             attachment.IsEnabled = attachment.Items.Count != 0;
             extract_attachment.IsEnabled = attachment.Items.Count != 0;
 
-            if (eml.TextBody != null)
-            {
-                textBody.Text = Encoding.UTF8.GetString(eml.TextBody.Body);
-            }
-            if (eml.HtmlBody != null)
-            {
-                textBody.Text = Encoding.UTF8.GetString(eml.HtmlBody.Body);
-            }
+            textBody.Text = Encoding.UTF8.GetString(eml.TextBody.Body) + Encoding.UTF8.GetString(eml.HtmlBody.Body);
         }
 
         private void Extract_attachment_Click(object sender, RoutedEventArgs e)
