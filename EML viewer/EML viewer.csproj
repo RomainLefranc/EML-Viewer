@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="MSGReader" Version="4.2.3" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

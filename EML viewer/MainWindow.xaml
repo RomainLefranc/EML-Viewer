@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EML_viewer"
         mc:Ignorable="d"
-        Title="EML Viewer" Width="800" VerticalAlignment="Top" SizeToContent="Height">
+        Title="EML Reader" Width="800" VerticalAlignment="Top" SizeToContent="Height">
     <Grid VerticalAlignment="Top" >
         <Label Content="Message :" Margin="10,335,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <TextBox x:Name="textBody" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Margin="10,361,10,10" Visibility="Visible" VerticalAlignment="Top" IsReadOnly="True" />
@@ -37,7 +37,7 @@
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <ComboBox x:Name="source" Margin="0,-1,10,0" VerticalAlignment="Top" Loaded="Source_Loaded" SelectionChanged="Source_SelectionChanged"/>
-            <Button x:Name="openfolder" Content="Ouvrir dossier source" VerticalAlignment="Top" Height="22" Click="Openfolder_Click" Grid.Column="1" Margin="0,-1,0,0" HorizontalAlignment="Center" Width="200"/>
+            <Button x:Name="addFile" Content="Ajouter fichier eml" VerticalAlignment="Top" Height="22" Grid.Column="1" Margin="0,-1,0,0" HorizontalAlignment="Center" Width="200" Click="AddFile_Click"/>
         </Grid>
 
     </Grid>

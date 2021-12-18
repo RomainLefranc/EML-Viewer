@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.IO;
+using Microsoft.Win32;
 namespace EML_viewer
 {
     /// <summary>
@@ -20,10 +21,9 @@ namespace EML_viewer
                 _ = Directory.CreateDirectory(@"source\");
             }
         }
-
-        private void Source_Loaded(object sender, RoutedEventArgs e)
+        private void Reload_Source_Combobox()
         {
-
+            source.Items.Clear();
             // récupération d'une tableau contenant tout les fichiers du dossier source
             string[] filePaths = Directory.GetFiles(@"source\", "*.eml");
 
@@ -32,6 +32,11 @@ namespace EML_viewer
             {
                 _ = source.Items.Add(file.Split(@"\")[1]);
             }
+        }
+
+        private void Source_Loaded(object sender, RoutedEventArgs e)
+        {
+            Reload_Source_Combobox();
         }
 
         private void Source_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -79,31 +84,31 @@ namespace EML_viewer
             if (attachment.SelectedIndex >= 0)
             {
                 string filename = attachment.SelectedItem.ToString().Split(" - ")[0];
-                if (!File.Exists(@"source\" + filename))
+                Ookii.Dialogs.Wpf.VistaFolderBrowserDialog dialog = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+                if (dialog.ShowDialog(this).GetValueOrDefault())
                 {
                     MsgReader.Mime.MessagePart file = eml.Attachments.FirstOrDefault(x => x.FileName == filename);
-                    FileInfo fileInfo = new FileInfo(@"source\" + filename);
+                    FileInfo fileInfo = new FileInfo(dialog.SelectedPath + @"\" + filename);
                     file.Save(fileInfo);
                     _ = MessageBox.Show("Le fichier " + filename + " à été extrait");
-                } else
-                {
-                    _ = MessageBox.Show("Le fichier " + filename + " à déjà été extrait");
                 }
-
             } else
             {
                 _ = MessageBox.Show("Veuillez selectioner une piece jointe");
             }
         }
 
-        private void Openfolder_Click(object sender, RoutedEventArgs e)
+        private void AddFile_Click(object sender, RoutedEventArgs e)
         {
-            _ = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Eml files (*.eml)|*.eml";
+            if (openFileDialog.ShowDialog() == true)
             {
-                FileName = @"source\",
-                UseShellExecute = true,
-                Verb = "open"
-            });
+                File.Copy(openFileDialog.FileName, @"source\" + Path.GetFileName(openFileDialog.FileName));
+                Reload_Source_Combobox();
+                _ = MessageBox.Show("Fichier ajouté");
+            }
+            
         }
     }
 }
