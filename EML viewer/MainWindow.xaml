@@ -10,7 +10,7 @@
         <Label Content="Message :" Margin="10,335,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <TextBox x:Name="textBody" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Margin="10,361,10,10" Visibility="Visible" VerticalAlignment="Top" IsReadOnly="True" />
         <Label Content="Source" Margin="10,3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-        <Label Content="Piece(s) jointes :" Margin="10,187,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <Label Content="Pièce(s) jointe(s) :" Margin="10,187,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <ListBox x:Name="attachment" Margin="10,213,10,0" ScrollViewer.VerticalScrollBarVisibility="Auto" UseLayoutRounding="False" VerticalAlignment="Top" Height="97"/>
         <Grid Margin="10,51,10,0"  VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
