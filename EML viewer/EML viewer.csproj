@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Karmine_Corp_logo.svg.png" />
   </ItemGroup>
 
   <ItemGroup>

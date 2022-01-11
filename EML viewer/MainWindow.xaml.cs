@@ -21,30 +21,38 @@ namespace EML_viewer
                 _ = Directory.CreateDirectory(@"source\");
             }
         }
-        private void Reload_Source_Combobox()
+        private void Combobox_source_load()
         {
+            // vide le select de fichier
             source.Items.Clear();
             // récupération d'une tableau contenant tout les fichiers du dossier source
             string[] filePaths = Directory.GetFiles(@"source\", "*.eml");
 
-            // ajout des fichiers dans un combobox
-            foreach (string file in filePaths)
+            if (filePaths.Length == 0)
             {
-                _ = source.Items.Add(file.Split(@"\")[1]);
+                source.IsEnabled = false;
+            }
+            else
+            {
+                source.IsEnabled = true;
+                // ajout des fichiers dans un combobox
+                foreach (string file in filePaths)
+                {
+                    _ = source.Items.Add(file.Split(@"\")[1]);
+                }
             }
         }
 
         private void Source_Loaded(object sender, RoutedEventArgs e)
         {
-            Reload_Source_Combobox();
+            Combobox_source_load();
         }
 
         private void Source_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // récuperation du fichier a analyser
+            // récuperation du nom du fichier a analyser
             FileInfo fileInfo = new FileInfo(@"source\" + source.SelectedItem.ToString());
 
-            // analyse du fichier
             eml = MsgReader.Mime.Message.Load(fileInfo);
 
             from.Text = eml.Headers.From.ToString();
@@ -54,9 +62,7 @@ namespace EML_viewer
                 if (eml.Headers.To != null)
                 {
                     to.Text = string.Join(", ", eml.Headers.To.Select(x => x.Address).ToArray());
-
                 }
-
             }
 
             subject.Text = eml.Headers.Subject;
@@ -67,6 +73,7 @@ namespace EML_viewer
 
             date.Text = eml.Headers.Date;
 
+            // vide la liste des pieces jointes
             attachment.Items.Clear();
 
             foreach (MsgReader.Mime.MessagePart piece in eml.Attachments)
@@ -92,23 +99,31 @@ namespace EML_viewer
                     file.Save(fileInfo);
                     _ = MessageBox.Show("Le fichier " + filename + " à été extrait");
                 }
-            } else
+            }
+            else
             {
-                _ = MessageBox.Show("Veuillez selectioner une piece jointe");
+                _ = MessageBox.Show("Veuillez selectionner une piece jointe");
             }
         }
 
         private void AddFile_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Eml files (*.eml)|*.eml";
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Eml files (*.eml)|*.eml"
+            };
             if (openFileDialog.ShowDialog() == true)
             {
-                File.Copy(openFileDialog.FileName, @"source\" + Path.GetFileName(openFileDialog.FileName));
-                Reload_Source_Combobox();
-                _ = MessageBox.Show("Fichier ajouté");
+                try
+                {
+                    File.Copy(openFileDialog.FileName, @"source\" + Path.GetFileName(openFileDialog.FileName));
+                }
+                catch (IOException error)
+                {
+                    _ = MessageBox.Show(error.Message);
+                }
             }
-            
+            Combobox_source_load();
         }
     }
 }
