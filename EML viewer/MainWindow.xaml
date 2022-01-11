@@ -12,7 +12,7 @@
         <Label Content="Source" Margin="10,3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <Label Content="Piece(s) jointes :" Margin="10,187,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
         <ListBox x:Name="attachment" Margin="10,213,10,0" ScrollViewer.VerticalScrollBarVisibility="Auto" UseLayoutRounding="False" VerticalAlignment="Top" Height="97"/>
-        <Grid Margin="10,50,10,0"  VerticalAlignment="Top">
+        <Grid Margin="10,51,10,0"  VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -20,24 +20,26 @@
             <Label Content="De :" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
             <TextBox x:Name="from" TextWrapping="Wrap" Margin="0,26,10,0" VerticalAlignment="Top" IsReadOnly="True"/>
             <Label Content="Date :" Margin="0,44,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-            <TextBox x:Name="date" TextWrapping="Wrap" Margin="0,69,10,0" VerticalAlignment="Top" IsReadOnly="True"/>
-            <Label Content="Cci :" Margin="1,88,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-            <TextBox x:Name="cci" TextWrapping="Wrap" Margin="1,111,10,0" VerticalAlignment="Top" IsReadOnly="True"/>
+            <TextBox x:Name="date" TextWrapping="Wrap" Margin="0,70,10,0" VerticalAlignment="Top" IsReadOnly="True"/>
+            <Label Content="Cci :" Margin="0,88,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5" Height="26"/>
+            <TextBox x:Name="cci" TextWrapping="Wrap" Margin="0,114,11,0" VerticalAlignment="Top" IsReadOnly="True"/>
             <Label Content="A :" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5" Grid.Column="1"/>
             <TextBox x:Name="to" TextWrapping="Wrap" Margin="0,26,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" IsReadOnly="True" Grid.Column="1"/>
             <Label Content="Cc :" Margin="0,44,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5" Grid.Column="1"/>
-            <TextBox x:Name="cc" TextWrapping="Wrap" Margin="0,69,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" IsReadOnly="True" Grid.Column="1"/>
-            <Label Content="Sujet :" Margin="0,87,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5" Grid.Column="1"/>
-            <TextBox x:Name="subject" TextWrapping="Wrap" Margin="0,111,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" IsReadOnly="True" Grid.Column="1"/>
+            <TextBox x:Name="cc" TextWrapping="Wrap" Margin="0,70,0,0" VerticalAlignment="Top" IsReadOnly="True" Grid.Column="1"/>
+            <Label Content="Sujet :" Margin="0,88,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5" Grid.Column="1"/>
+            <TextBox x:Name="subject" TextWrapping="Wrap" Margin="0,114,0,0" VerticalAlignment="Top" IsReadOnly="True" Grid.Column="1"/>
+
         </Grid>
         <Button x:Name="extract_attachment" Content="Extraire" Margin="10,315,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="164" IsEnabled="False" Click="Extract_attachment_Click"/>
         <Grid Margin="10,29,10,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="83*"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="128"/>
             </Grid.ColumnDefinitions>
-            <ComboBox x:Name="source" Margin="0,-1,10,0" VerticalAlignment="Top" Loaded="Source_Loaded" SelectionChanged="Source_SelectionChanged"/>
-            <Button x:Name="addFile" Content="Ajouter fichier eml" VerticalAlignment="Top" Height="22" Grid.Column="1" Margin="0,-1,0,0" HorizontalAlignment="Center" Width="200" Click="AddFile_Click"/>
+
+            <ComboBox x:Name="source" Margin="0,0,10,0" VerticalAlignment="Center" Loaded="Source_Loaded"  SelectionChanged="Source_SelectionChanged" Height="22"/>
+            <Button x:Name="addFile" Content="ajouter fichier .eml" VerticalAlignment="Center" Height="22" Grid.Column="1" HorizontalAlignment="Center" Width="128" Click="AddFile_Click"/>
         </Grid>
 
     </Grid>
